@@ -7,11 +7,9 @@ terraform {
   }
 }
 
-provider "google" {
-  project = var.GCP_PROJECT_ID
-}
+provider "google" {}
 
-variable "GCP_PROJECT_ID" {}
+
 
 resource "google_sql_database_instance" "dev" {
   name             = "humanitec-psql-dev"
