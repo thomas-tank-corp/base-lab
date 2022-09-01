@@ -96,7 +96,7 @@ else:
 #         "zone": f"{k8_gcpzone}"
 #       },
 #       "secrets" : {
-#         "credentials" f"{gcp_sa}"
+#         "credentials": f"{gcp_sa}"
 #       }
 #     }
 # }
