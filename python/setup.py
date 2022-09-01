@@ -81,31 +81,31 @@ else:
 
 # Register GKE Cluster
 ##########################################################
-# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/definitions"
-# payload = {
-#     "org_id": f"{humanitec_org}",
-#     "id": f"k8-dev-{gcp_id}",
-#     "name": f"k8-dev-{gcp_id}",
-#     "type": "k8s-cluster",
-#     "driver_type": "humanitec/k8s-cluster-gke",
-#     "driver_inputs": {
-#       "values": {
-#         "loadbalancer": f"{k8_lb_ip}",
-#         "name": "humanitec-k8-dev",
-#         "project_id": f"{k8_gcpprojectid}",
-#         "zone": f"{k8_gcpzone}"
-#       },
-#       "secrets" : {
-#         "credentials": f"{gcp_sa}"
-#       }
-#     }
-# }
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/definitions"
+payload = {
+    "org_id": f"{humanitec_org}",
+    "id": f"k8-dev-{gcp_id}",
+    "name": f"k8-dev-{gcp_id}",
+    "type": "k8s-cluster",
+    "driver_type": "humanitec/k8s-cluster-gke",
+    "driver_inputs": {
+      "values": {
+        "loadbalancer": f"{k8_lb_ip}",
+        "name": "humanitec-k8-dev",
+        "project_id": f"{k8_gcpprojectid}",
+        "zone": f"{k8_gcpzone}"
+      },
+      "secrets" : {
+        "credentials": f"{gcp_sa}"
+      }
+    }
+}
 
-# response = requests.request("POST", url, headers=headers, json=payload)
-# if response.status_code==200:
-#     print(f"The resource definition has been registered.")
-# else:
-#     print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+response = requests.request("POST", url, headers=headers, json=payload)
+if response.status_code==200:
+    print(f"The resource definition has been registered.")
+else:
+    print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
 
 
 
