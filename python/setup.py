@@ -81,11 +81,10 @@ else:
 
 # Register GKE Cluster
 ##########################################################
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/definitions"
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "org_id": f"{humanitec_org}",
-    "id": f"k8-dev-{gcp_id}",
-    "name": f"k8-dev-{gcp_id}",
+    "id": f"k8-second-{gcp_id}",
+    "name": f"k8-second-{gcp_id}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-gke",
     "driver_inputs": {
