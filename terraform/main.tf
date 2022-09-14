@@ -56,3 +56,8 @@ output "k8_dev_cluster_master_endpoint" {
     value = google_container_cluster.dev.endpoint
 }
 
+output "IMAGE_NAME" {
+    value = random_pet.image.hex
+}
+
+
