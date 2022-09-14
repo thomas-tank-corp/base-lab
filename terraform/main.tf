@@ -57,7 +57,7 @@ output "k8_dev_cluster_master_endpoint" {
 }
 
 output "IMAGE_NAME" {
-    value = random_pet.image.hex
+    value = random_pet.image.id
 }
 
 
