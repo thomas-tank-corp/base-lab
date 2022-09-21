@@ -15,20 +15,10 @@ resource "google_sql_database_instance" "dev" {
   }
 }
 
-
 resource "google_sql_user" "users" {
   name     = "humanitec_user"
   instance = google_sql_database_instance.dev.name
   password = random_id.db_pass.hex
-}
-
-
-output "psql_dev_connection_name" {
-    value = google_sql_database_instance.dev.connection_name
-}
-
-output "psql_dev_password" {
-    value = random_id.db_pass.hex
 }
 
 resource "google_container_cluster" "dev" {
@@ -37,14 +27,4 @@ resource "google_container_cluster" "dev" {
   initial_node_count = 1
 }
 
-output "k8_dev_cluster_id" {
-    value = google_container_cluster.dev.id
-}
 
-output "k8_dev_cluster_master_endpoint" {
-    value = google_container_cluster.dev.endpoint
-}
-
-output "IMAGE_NAME" {
-    value = random_pet.image.id
-}
