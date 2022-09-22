@@ -105,7 +105,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "5.1.0"
 
-  identifier = "RDS_POSTGRES"
+  identifier = "postgres"
 
 
   engine               = "postgres"
