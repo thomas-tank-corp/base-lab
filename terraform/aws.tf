@@ -82,7 +82,7 @@ module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
-  name        = local.name
+  name        = "db_group"
   description = "Complete PostgreSQL example security group"
   vpc_id      = module.vpc.vpc_id
 
@@ -97,7 +97,7 @@ module "security_group" {
     },
   ]
 
-  tags = local.tags
+  tags = "humanitec-dev-rds"
 }
 
 
@@ -105,7 +105,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "5.1.0"
 
-  identifier = RDS_POSTGRES
+  identifier = "RDS_POSTGRES"
 
 
   engine               = "postgres"
@@ -120,7 +120,7 @@ module "db" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  db_name  = RDS_POSTGRES
+  db_name  = "RDS_POSTGRES"
   username = "postgresql"
   port     = 5432
 
