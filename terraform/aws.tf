@@ -1,5 +1,6 @@
 locals {
   region = "eu-west-1"
+  name_prefix = "tom"
 }
 
 
