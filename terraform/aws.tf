@@ -101,31 +101,31 @@ module "security_group" {
 }
 
 
-module "db" {
-  source  = "terraform-aws-modules/rds/aws"
-  version = "5.1.0"
+# module "db" {
+#   source  = "terraform-aws-modules/rds/aws"
+#   version = "5.1.0"
 
-  identifier = "postgres"
+#   identifier = "postgres"
 
 
-  engine               = "postgres"
-  engine_version       = "14.1"
-  family               = "postgres14" 
-  major_engine_version = "14"         
-  instance_class       = "db.t4g.large"
+#   engine               = "postgres"
+#   engine_version       = "14.1"
+#   family               = "postgres14" 
+#   major_engine_version = "14"         
+#   instance_class       = "db.t4g.large"
 
-  allocated_storage     = 20
-  max_allocated_storage = 100
+#   allocated_storage     = 20
+#   max_allocated_storage = 100
 
-  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
-  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
-  # user cannot be used as it is a reserved word used by the engine"
-  db_name  = "rds-postgres"
-  username = "postgresql"
-  port     = 5432
+#   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+#   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+#   # user cannot be used as it is a reserved word used by the engine"
+#   db_name  = "rds-postgres"
+#   username = "postgresql"
+#   port     = 5432
 
-  multi_az               = true
-  db_subnet_group_name   = module.vpc.vpc_id
-  vpc_security_group_ids = [module.security_group.security_group_id]
+#   multi_az               = true
+#   db_subnet_group_name   = module.vpc.vpc_id
+#   vpc_security_group_ids = [module.security_group.security_group_id]
 
-}
+# }
