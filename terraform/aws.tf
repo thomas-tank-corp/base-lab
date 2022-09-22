@@ -97,7 +97,6 @@ module "security_group" {
     },
   ]
 
-  tags = "humanitec-dev-rds"
 }
 
 
