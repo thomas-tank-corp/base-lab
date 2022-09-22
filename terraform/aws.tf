@@ -120,7 +120,7 @@ module "db" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  db_name  = "RDS_POSTGRES"
+  db_name  = "rds-postgres"
   username = "postgresql"
   port     = 5432
 
