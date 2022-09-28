@@ -19,9 +19,9 @@ try:
     gke_endpoint = os.environ['GKE_ENDPOINT']
     k8_gcpprojectid = os.environ ['INSTRUQT_GCP_PROJECT_GCP_PROJECT_PROJECT_ID']
     k8_gcpzone = os.environ ['GOOGLE_ZONE']
-    sql_usr = os.environ ['SQL_USR']
-    sql_pass = os.environ ['SQL_PASS']
-    sql_connection = os.environ['SQL_CONNECTION']
+#     sql_usr = os.environ ['SQL_USR']
+#     sql_pass = os.environ ['SQL_PASS']
+#     sql_connection = os.environ['SQL_CONNECTION']
 except Exception as e:
     print(f"Error: Could not read {e} from environment.")
     print(f"Please export {e} as environment variable.")
@@ -112,29 +112,29 @@ else:
 # Register CloudSQL
 ##########################################################
 
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-payload = {
-"criteria": [ ],
-"driver_account": f"{gcp_id}",
-"driver_inputs": {
- "secrets": {
-    "dbcredentials": {
-      "password": f"{sql_pass}",
-      "username": f"{sql_usr}"
-    }
-  },
-  "values": {
-      "instance": f"{sql_connection}"
-  }
-},
-"driver_type": "humanitec/cloudsql",
-"id": f"postgres-dev-{gcp_id}",
-"name": f"postgres-dev-{gcp_id}",
-"type": "postgres"
-}
+# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+# payload = {
+# "criteria": [ ],
+# "driver_account": f"{gcp_id}",
+# "driver_inputs": {
+#  "secrets": {
+#     "dbcredentials": {
+#       "password": f"{sql_pass}",
+#       "username": f"{sql_usr}"
+#     }
+#   },
+#   "values": {
+#       "instance": f"{sql_connection}"
+#   }
+# },
+# "driver_type": "humanitec/cloudsql",
+# "id": f"postgres-dev-{gcp_id}",
+# "name": f"postgres-dev-{gcp_id}",
+# "type": "postgres"
+# }
 
-response = requests.request("POST", url, headers=headers, json=payload)
-if response.status_code==200:
-    print(f"The resource definition has been registered.")
-else:
-    print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+# response = requests.request("POST", url, headers=headers, json=payload)
+# if response.status_code==200:
+#     print(f"The resource definition has been registered.")
+# else:
+#     print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
