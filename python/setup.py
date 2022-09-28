@@ -16,7 +16,7 @@ try:
     gcp_password = os.environ['INSTRUQT_GCP_PROJECT_GCP_PROJECT_USER_PASSWORD']
     gcp_id = os.environ['INSTRUQT_GCP_PROJECT_GCP_PROJECT_PROJECT_ID']
     gcp_sa = os.environ['GCP_SA']
-    k8_lb_ip = os.environ['K8_DEV_INGRESS_IP']
+    gke_endpoint = os.environ['GKE_ENDPOINT']
     k8_gcpprojectid = os.environ ['INSTRUQT_GCP_PROJECT_GCP_PROJECT_PROJECT_ID']
     k8_gcpzone = os.environ ['GOOGLE_ZONE']
     sql_usr = os.environ ['SQL_USR']
@@ -83,13 +83,13 @@ else:
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "id": f"k8-second-{gcp_id}",
-    "name": f"k8-second-{gcp_id}",
+    "id": f"GKE-Humanitec-{gcp_id}",
+    "name": f"GKE-Humanitec-{gcp_id}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-gke",
     "driver_inputs": {
       "values": {
-        "loadbalancer": f"{k8_lb_ip}",
+        "loadbalancer": f"{gke_endpoint}",
         "name": "humanitec-k8-dev",
         "project_id": f"{k8_gcpprojectid}",
         "zone": f"{k8_gcpzone}"
