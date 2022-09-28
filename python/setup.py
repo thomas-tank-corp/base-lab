@@ -49,11 +49,11 @@ payload = {
 }
 response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
-    print(f"The resource account has been registered.")
+    print(f"The resource AWS account has been registered.")
 elif response.status_code==409:
-    print(f"Unable to create resource account. Account with id aws-instruqt already exists.")
+    print(f"Unable to create AWS resource account. Account with id aws-instruqt already exists.")
 else:
-    print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+    print(f"Unable to create AWS resource account. POST {url} returned status code {response.status_code}.")
 
 
 # Register GCP Resource Account 
@@ -70,11 +70,11 @@ payload = {
 }
 response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
-    print(f"The resource account has been registered.")
+    print(f"The GCP account has been registered.")
 elif response.status_code==409:
-    print(f"Unable to create resource account. Account with id already exists.")
+    print(f"Unable to create GCP resource account. Account with id already exists.")
 else:
-    print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+    print(f"Unable to create GCP resource account. POST {url} returned status code {response.status_code}.")
 
 
 
@@ -83,8 +83,8 @@ else:
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "id": f"GKE-Humanitec-{gcp_id}",
-    "name": f"GKE-Humanitec-{gcp_id}",
+    "id": f"gke-humanitec-{gcp_id}",
+    "name": f"gke-humanitec-{gcp_id}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-gke",
     "driver_inputs": {
@@ -104,7 +104,7 @@ response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
     print(f"The resource definition has been registered.")
 else:
-    print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+    print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
 
 
 
@@ -137,4 +137,4 @@ else:
 # if response.status_code==200:
 #     print(f"The resource definition has been registered.")
 # else:
-#     print(f"Unable to create resource account. POST {url} returned status code {response.status_code}.")
+#     print(f"Unable to create CloudSQL resource account. POST {url} returned status code {response.status_code}.")

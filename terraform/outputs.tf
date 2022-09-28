@@ -12,7 +12,7 @@ output "eks_cluster_endpoint" {
 
 
 output "k8_dev_cluster_id" {
-    value = google_container_cluster.dev.id
+    value = google_container_cluster.dev.name
 }
 
 output "gke_endpoint" {
