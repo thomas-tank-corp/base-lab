@@ -27,7 +27,7 @@ resource "google_container_cluster" "dev" {
   initial_node_count = 1
 }
 
-output "endpoint" {
+output "gke_endpoint" {
   value = data.google_container_cluster.dev.endpoint
 }
 
