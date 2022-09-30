@@ -19,6 +19,11 @@ try:
     gke_endpoint = os.environ['GKE_ENDPOINT']
     k8_gcpprojectid = os.environ ['INSTRUQT_GCP_PROJECT_GCP_PROJECT_PROJECT_ID']
     k8_gcpzone = os.environ ['GOOGLE_ZONE']
+    aws_key = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_ACCESS_KEY_ID']
+    aws_secret = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_SECRET_ACCESS_KEY']
+    eks_endpoint = os.environ ['EKS_ENDPOINT'] 
+    random = os.environ ['RANDOM']
+ 
 #     sql_usr = os.environ ['SQL_USR']
 #     sql_pass = os.environ ['SQL_PASS']
 #     sql_connection = os.environ['SQL_CONNECTION']
@@ -106,7 +111,33 @@ if response.status_code==200:
 else:
     print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
 
+# Register EKS Cluster
+##########################################################
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+payload = {
+    "id": f"eks-humanitec-{random}",
+    "name": f"eks-humanitec-{random}",
+    "type": "k8s-cluster",
+    "driver_type": "humanitec/k8s-cluster-eks",
+    "driver_inputs": {
+      "values": {
+        "credentials":{
+            "aws_access_key_id": f"{aws_key}",
+            "aws_secret_access_key": f"{aws_secret}"
+        },
+        "loadbalancer": f"{eks_endpoint}",
+        "loadbalancer_hosted_zone": "eu-west-1",
+        "name": "humanitec-eks",
+        "region": "eu-west-1"
+      }
+    }
+}
 
+response = requests.request("POST", url, headers=headers, json=payload)
+if response.status_code==200:
+    print(f"The EKS resource definition has been registered.")
+else:
+    print(f"Unable to create EKS resource account. POST {url} returned status code {response.status_code}.")
 
 
 # Register CloudSQL
