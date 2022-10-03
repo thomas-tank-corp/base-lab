@@ -59,6 +59,6 @@ variable "subnet_prefix" {
 
 
 output "aks_endpoint" {
-    value = azurerm_kubernetes_cluster.humanitec.fqdm
+    value = azurerm_kubernetes_cluster.humanitec.fqdn
 }
 
