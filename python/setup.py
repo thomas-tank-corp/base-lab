@@ -26,6 +26,14 @@ try:
     sql_usr = os.environ ['SQL_USR']
     sql_pass = os.environ ['SQL_PASS']
     sql_connection = os.environ['SQL_CONNECTION']
+
+    azure_client_id = os.environ ['RANDOM']
+    azure_client_secret = os.environ ['RANDOM']
+    azure_subscription_id = os.environ ['RANDOM']
+    azure_tenant_id = os.environ ['RANDOM']
+    aks_endpoint = os.environ ['RANDOM']
+
+
 except Exception as e:
     print(f"Error: Could not read {e} from environment.")
     print(f"Please export {e} as environment variable.")
@@ -139,11 +147,14 @@ else:
     print(f"Unable to create EKS resource account. POST {url} returned status code {response.status_code}.")
 
 
-Register CloudSQL
+#Register GCP CloudSQL
 #########################################################
 
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
+"id": f"postgres-dev-{gcp_id}",
+"name": f"postgres-dev-{gcp_id}",
+"type": "postgres"
 "criteria": [ ],
 "driver_account": f"{gcp_id}",
 "driver_inputs": {
@@ -158,9 +169,6 @@ payload = {
   }
 },
 "driver_type": "humanitec/cloudsql",
-"id": f"postgres-dev-{gcp_id}",
-"name": f"postgres-dev-{gcp_id}",
-"type": "postgres"
 }
 
 response = requests.request("POST", url, headers=headers, json=payload)
@@ -168,3 +176,28 @@ if response.status_code==200:
     print(f"The resource definition has been registered.")
 else:
     print(f"Unable to create CloudSQL resource account. POST {url} returned status code {response.status_code}.")
+
+#Register AKS
+#########################################################
+# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+# payload = {
+#     "id": f"aks-humanitec-{random}",
+#     "name": f"aks-humanitec-{random}",
+#     "type": "k8s-cluster",
+#     "driver_type": "humanitec/k8s-cluster-aks",
+#     "driver_inputs": {
+#       "values": {
+#         "credentials":{
+#             "ARM_CLIENT_ID" : f"{azure_client_id}",
+#             "ARM_CLIENT_SECRET": f"{azure_client_secret}",
+#             "ARM_SUBSCRIPTION_ID": f"{azure_subscription_id}",
+#             "ARM_TENANT_ID": f"{azure_tenant_id}"      
+#         },
+#         "loadbalancer": f"{aks_endpoint}",
+#         "loadbalancer_hosted_zone": "eu-west-1",
+#         "name": "humanitec-eks",
+#         "region": "eu-west-1"
+#       }
+#     }
+# }
+

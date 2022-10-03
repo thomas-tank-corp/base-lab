@@ -8,6 +8,10 @@ terraform {
       source = "hashicorp/aws"
       version = "4.31.0"
     }
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "3.25.0"
+    }
     tls = {
       source = "hashicorp/tls"
       version = "4.0.3"
@@ -15,6 +19,10 @@ terraform {
   }
 }
 
+
+provider "azurerm" {
+  # Configuration options
+}
 provider "aws" {
   region = local.region
 }
