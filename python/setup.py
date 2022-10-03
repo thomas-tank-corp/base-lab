@@ -152,9 +152,6 @@ else:
 
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-"id": f"postgres-dev-{gcp_id}",
-"name": f"postgres-dev-{gcp_id}",
-"type": "postgres"
 "criteria": [ ],
 "driver_account": f"{gcp_id}",
 "driver_inputs": {
@@ -169,6 +166,9 @@ payload = {
   }
 },
 "driver_type": "humanitec/cloudsql",
+"id": f"postgres-dev-{gcp_id}",
+"name": f"postgres-dev-{gcp_id}",
+"type": "postgres"
 }
 
 response = requests.request("POST", url, headers=headers, json=payload)
