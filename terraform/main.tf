@@ -21,7 +21,7 @@ terraform {
 
 
 provider "azurerm" {
-  # Configuration options
+  features {}
 }
 provider "aws" {
   region = local.region
