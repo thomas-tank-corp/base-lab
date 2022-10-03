@@ -164,7 +164,7 @@ payload = {
   "values": {
       "instance": f"{sql_connection}"
   }
-},
+ },
 "driver_type": "humanitec/cloudsql",
 "id": f"postgres-dev-{gcp_id}",
 "name": f"postgres-dev-{gcp_id}",
