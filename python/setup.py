@@ -22,16 +22,16 @@ try:
     aws_key = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_ACCESS_KEY_ID']
     aws_secret = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_SECRET_ACCESS_KEY']
     eks_endpoint = os.environ ['EKS_ENDPOINT'] 
-    random = os.environ ['RANDOM']
+    random = os.environ ['RANDOM_TF']
     sql_usr = os.environ ['SQL_USR']
     sql_pass = os.environ ['SQL_PASS']
     sql_connection = os.environ['SQL_CONNECTION']
 
-    azure_client_id = os.environ ['RANDOM']
-    azure_client_secret = os.environ ['RANDOM']
-    azure_subscription_id = os.environ ['RANDOM']
-    azure_tenant_id = os.environ ['RANDOM']
-    aks_endpoint = os.environ ['RANDOM']
+    # azure_client_id = os.environ ['RANDOM']
+    # azure_client_secret = os.environ ['RANDOM']
+    # azure_subscription_id = os.environ ['RANDOM']
+    # azure_tenant_id = os.environ ['RANDOM']
+    # aks_endpoint = os.environ ['RANDOM']
 
 
 except Exception as e:
@@ -95,8 +95,8 @@ else:
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "id": f"gke-humanitec-{gcp_id}",
-    "name": f"gke-humanitec-{gcp_id}",
+    "id": f"gke-humanitec-{random}",
+    "name": f"gke-humanitec-{random}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-gke",
     "driver_inputs": {
@@ -152,10 +152,14 @@ else:
 
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
+"driver_type": "humanitec/postgres-cloudsql",
+"id": f"postgres-{random}",
+"name": f"postgres-{random}",
+"type": "postgres-cloudsql",
 "criteria": [ ],
 "driver_account": f"{gcp_id}",
 "driver_inputs": {
- "secrets": {
+  "secrets": {
     "dbcredentials": {
       "password": f"{sql_pass}",
       "username": f"{sql_usr}"
@@ -164,16 +168,12 @@ payload = {
   "values": {
       "instance": f"{sql_connection}"
   }
- },
-"driver_type": "humanitec/cloudsql",
-"id": f"postgres-dev-{gcp_id}",
-"name": f"postgres-dev-{gcp_id}",
-"type": "postgres"
+ } 
 }
 
 response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
-    print(f"The resource definition has been registered.")
+    print(f"The resource CloudSQL definition has been registered.")
 else:
     print(f"Unable to create CloudSQL resource account. POST {url} returned status code {response.status_code}.")
 
@@ -200,4 +200,3 @@ else:
 #       }
 #     }
 # }
-
