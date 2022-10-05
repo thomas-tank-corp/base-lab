@@ -114,7 +114,7 @@ payload = {
 
 response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
-    print(f"The resource definition has been registered.")
+    print(f"The resource GKE resource definition has been registered.")
 else:
     print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
 
@@ -127,11 +127,14 @@ payload = {
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-eks",
     "driver_inputs": {
-      "values": {
-        "credentials":{
+    "driver_inputs": {
+      "secrets": {
+         "credentials": {
             "aws_access_key_id": f"{aws_key}",
             "aws_secret_access_key": f"{aws_secret}"
-        },
+          }
+      },
+      "values": {
         "loadbalancer": f"{eks_endpoint}",
         "loadbalancer_hosted_zone": "eu-west-1",
         "name": "humanitec-eks",
