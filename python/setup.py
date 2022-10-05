@@ -95,8 +95,8 @@ else:
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "id": f"gke-humanitec-{random}",
-    "name": f"gke-humanitec-{random}",
+    "id": f"gke-{random}",
+    "name": f"gke-{random}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-gke",
     "driver_inputs": {
@@ -122,11 +122,10 @@ else:
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-    "id": f"eks-humanitec-{random}",
-    "name": f"eks-humanitec-{random}",
+    "id": f"eks-{random}",
+    "name": f"eks-{random}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-eks",
-    "driver_inputs": {
     "driver_inputs": {
       "secrets": {
          "credentials": {
