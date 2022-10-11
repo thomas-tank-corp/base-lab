@@ -26,6 +26,7 @@ try:
     sql_usr = os.environ ['SQL_USR']
     sql_pass = os.environ ['SQL_PASS']
     sql_connection = os.environ['SQL_CONNECTION']
+    gke_payload = os.environ['GKE_PAYLOAD']
 
     # azure_client_id = os.environ ['RANDOM']
     # azure_client_secret = os.environ ['RANDOM']
@@ -94,23 +95,7 @@ else:
 # Register GKE Cluster
 ##########################################################
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-payload = {
-    "id": f"gke-{random}",
-    "name": f"gke-{random}",
-    "type": "k8s-cluster",
-    "driver_type": "humanitec/k8s-cluster-gke",
-    "driver_inputs": {
-      "values": {
-        "loadbalancer": f"{gke_endpoint}",
-        "name": "humanitec-k8-dev",
-        "project_id": f"{k8_gcpprojectid}",
-        "zone": f"{k8_gcpzone}"
-      },
-      "secrets" : {
-        "credentials": f"{gcp_sa}"
-      }
-    }
-}
+payload = f"{gke_payload}"
 
 response = requests.request("POST", url, headers=headers, json=payload)
 if response.status_code==200:
@@ -126,7 +111,7 @@ payload = {
     "name": f"eks-{random}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-eks",
-    "driver_inputs": {
+    "driverinputs": {
       "secrets": {
          "credentials": {
             "aws_access_key_id": f"{aws_key}",
