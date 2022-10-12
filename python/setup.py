@@ -94,14 +94,14 @@ else:
 
 # Register GKE Cluster
 ##########################################################
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-payload = f"{gke_payload}"
+# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+# payload = f"{gke_payload}"
 
-response = requests.request("POST", url, headers=headers, json=payload)
-if response.status_code==200:
-    print(f"The resource GKE resource definition has been registered.")
-else:
-    print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
+# response = requests.request("POST", url, headers=headers, json=payload)
+# if response.status_code==200:
+#     print(f"The resource GKE resource definition has been registered.")
+# else:
+#     print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
 
 # Register EKS Cluster
 ##########################################################
