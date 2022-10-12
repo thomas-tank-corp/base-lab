@@ -53,8 +53,8 @@ headers = {
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/accounts"
 payload = {
     "credentials": {
-        "username": f"{aws_username}",
-        "password": f"{aws_password}"     
+        "access_key_id": f"{aws_key}",
+        "secret_key_id": f"{aws_secret}"     
       },
     "id" : f"{aws_id}",
     "name": f"{aws_id}",
