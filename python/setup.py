@@ -26,8 +26,8 @@ try:
     sql_usr = os.environ ['SQL_USR']
     sql_pass = os.environ ['SQL_PASS']
     sql_connection = os.environ['SQL_CONNECTION']
-    gke_payload = os.environ['GKE_PAYLOAD']
-
+    
+    # gke_payload = os.environ['GKE_PAYLOAD']
     # azure_client_id = os.environ ['RANDOM']
     # azure_client_secret = os.environ ['RANDOM']
     # azure_subscription_id = os.environ ['RANDOM']
@@ -139,11 +139,10 @@ else:
 
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-"driver_type": "humanitec/postgres-cloudsql",
 "id": f"postgres-{random}",
 "name": f"postgres-{random}",
-"type": "postgres-cloudsql",
-"criteria": [ ],
+"type": "postgres",
+"driver_type": "humanitec/cloudsql",
 "driver_account": f"{gcp_id}",
 "driver_inputs": {
   "secrets": {
@@ -163,6 +162,30 @@ if response.status_code==200:
     print(f"The resource CloudSQL definition has been registered.")
 else:
     print(f"Unable to create CloudSQL resource account. POST {url} returned status code {response.status_code}.")
+
+
+#Register Namespace
+#########################################################
+
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+payload = {
+"id": "kube-namespace",
+"name": "kube-namespace",
+"type": "k8s-namespace",
+"driver_type": "humanitec/static",
+"driver_inputs": {
+    "values": {
+    "namespace": "${context.env.id}-env-${context.app.id}-app"
+    }
+  }
+} 
+
+response = requests.request("POST", url, headers=headers, json=payload)
+if response.status_code==200:
+    print(f"The Namespace resource definition has been registered.")
+else:
+    print(f"Unable to create Namepsace resource definition. POST {url} returned status code {response.status_code}.")
+
 
 #Register AKS
 #########################################################
