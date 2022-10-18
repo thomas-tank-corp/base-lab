@@ -111,7 +111,7 @@ payload = {
     "name": f"eks-{random}",
     "type": "k8s-cluster",
     "driver_type": "humanitec/k8s-cluster-eks",
-    "driverinputs": {
+    "driver_inputs": {
       "secrets": {
          "credentials": {
             "aws_access_key_id": f"{aws_key}",
