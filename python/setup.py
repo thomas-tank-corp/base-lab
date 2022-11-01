@@ -22,7 +22,7 @@ try:
     aws_key = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_ACCESS_KEY_ID']
     aws_secret = os.environ ['INSTRUQT_AWS_ACCOUNT_AWS_ACCOUNT_AWS_SECRET_ACCESS_KEY']
     eks_endpoint = os.environ ['EKS_ENDPOINT'] 
-    random = os.environ ['RANDOM_TF']
+    random = os.environ ['UNIQUE']
     sql_usr = os.environ ['SQL_USR']
     sql_pass = os.environ ['SQL_PASS']
     sql_connection = os.environ['SQL_CONNECTION']
