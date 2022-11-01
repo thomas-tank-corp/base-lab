@@ -143,7 +143,7 @@ payload = {
 "name": f"postgres-{random}",
 "type": "postgres",
 "driver_type": "humanitec/postgres-cloudsql",
-"driver_account": f"{gcp_id}",
+"driver_account": f"{random}",
 "driver_inputs": {
   "secrets": {
     "dbcredentials": {
