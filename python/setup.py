@@ -169,8 +169,8 @@ else:
 
 url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
 payload = {
-"id": "kube-namespace",
-"name": "kube-namespace",
+"id": f"namespace-{random}",
+"name": f"namespace-{random}",
 "type": "k8s-namespace",
 "driver_type": "humanitec/static",
 "driver_inputs": {
