@@ -48,90 +48,6 @@ headers = {
 }
 
 
-# Register AWS Resource Account 
-##########################################################
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/accounts"
-payload = {
-    "credentials": {
-        "access_key_id": f"{aws_key}",
-        "secret_key_id": f"{aws_secret}"     
-      },
-    "id" : f"{aws_id}",
-    "name": f"{aws_id}",
-    "type": "aws"
-}
-response = requests.request("POST", url, headers=headers, json=payload)
-if response.status_code==200:
-    print(f"The resource AWS account has been registered.")
-elif response.status_code==409:
-    print(f"Unable to create AWS resource account. Account with id aws-instruqt already exists.")
-else:
-    print(f"Unable to create AWS resource account. POST {url} returned status code {response.status_code}.")
-
-
-# Register GCP Resource Account 
-##########################################################
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/accounts"
-payload = {
-    "credentials": {
-        "username": f"{gcp_username}",
-        "password": f"{gcp_password}"     
-      },
-    "id" : f"{gcp_id}",
-    "name": f"{gcp_id}",
-    "type": "gcp"
-}
-response = requests.request("POST", url, headers=headers, json=payload)
-if response.status_code==200:
-    print(f"The GCP account has been registered.")
-elif response.status_code==409:
-    print(f"Unable to create GCP resource account. Account with id already exists.")
-else:
-    print(f"Unable to create GCP resource account. POST {url} returned status code {response.status_code}.")
-
-
-
-
-# Register GKE Cluster
-##########################################################
-# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-# payload = f"{gke_payload}"
-
-# response = requests.request("POST", url, headers=headers, json=payload)
-# if response.status_code==200:
-#     print(f"The resource GKE resource definition has been registered.")
-# else:
-#     print(f"Unable to create GKE resource account. POST {url} returned status code {response.status_code}.")
-
-# Register EKS Cluster
-##########################################################
-url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-payload = {
-    "id": f"eks-{random}",
-    "name": f"eks-{random}",
-    "type": "k8s-cluster",
-    "driver_type": "humanitec/k8s-cluster-eks",
-    "driver_inputs": {
-      "secrets": {
-         "credentials": {
-            "aws_access_key_id": f"{aws_key}",
-            "aws_secret_access_key": f"{aws_secret}"
-          }
-      },
-      "values": {
-        "loadbalancer": f"{eks_endpoint}",
-        "loadbalancer_hosted_zone": "eu-west-1",
-        "name": "humanitec-eks",
-        "region": "eu-west-1"
-      }
-    }
-}
-
-response = requests.request("POST", url, headers=headers, json=payload)
-if response.status_code==200:
-    print(f"The EKS resource definition has been registered.")
-else:
-    print(f"Unable to create EKS resource account. POST {url} returned status code {response.status_code}.")
 
 
 #Register GCP CloudSQL
@@ -173,6 +89,11 @@ payload = {
 "name": f"namespace-{random}",
 "type": "k8s-namespace",
 "driver_type": "humanitec/static",
+"criteria": [
+    {
+      "env_type": "development"
+    }
+  ],
 "driver_inputs": {
     "values": {
     "namespace": "${context.env.id}-env-${context.app.id}-app"
@@ -185,28 +106,57 @@ if response.status_code==200:
     print(f"The Namespace resource definition has been registered.")
 else:
     print(f"Unable to create Namepsace resource definition. POST {url} returned status code {response.status_code}.")
+    
+
+# Register AWS Resource Account 
+##########################################################
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/accounts"
+payload = {
+    "credentials": {
+        "access_key_id": f"{aws_key}",
+        "secret_key_id": f"{aws_secret}"     
+      },
+    "id" : f"{aws_id}",
+    "name": f"{aws_id}",
+    "type": "aws"
+}
+response = requests.request("POST", url, headers=headers, json=payload)
+if response.status_code==200:
+    print(f"The resource AWS account has been registered.")
+elif response.status_code==409:
+    print(f"Unable to create AWS resource account. Account with id aws-instruqt already exists.")
+else:
+    print(f"Unable to create AWS resource account. POST {url} returned status code {response.status_code}.")
 
 
-#Register AKS
-#########################################################
-# url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
-# payload = {
-#     "id": f"aks-humanitec-{random}",
-#     "name": f"aks-humanitec-{random}",
-#     "type": "k8s-cluster",
-#     "driver_type": "humanitec/k8s-cluster-aks",
-#     "driver_inputs": {
-#       "values": {
-#         "credentials":{
-#             "ARM_CLIENT_ID" : f"{azure_client_id}",
-#             "ARM_CLIENT_SECRET": f"{azure_client_secret}",
-#             "ARM_SUBSCRIPTION_ID": f"{azure_subscription_id}",
-#             "ARM_TENANT_ID": f"{azure_tenant_id}"      
-#         },
-#         "loadbalancer": f"{aks_endpoint}",
-#         "loadbalancer_hosted_zone": "eu-west-1",
-#         "name": "humanitec-eks",
-#         "region": "eu-west-1"
-#       }
-#     }
-# }
+# Register EKS Cluster
+##########################################################
+url = f"https://{humanitec_url}/orgs/{humanitec_org}/resources/defs"
+payload = {
+    "id": f"eks-{random}",
+    "name": f"eks-{random}",
+    "type": "k8s-cluster",
+    "driver_type": "humanitec/k8s-cluster-eks",
+    "driver_inputs": {
+      "secrets": {
+         "credentials": {
+            "aws_access_key_id": f"{aws_key}",
+            "aws_secret_access_key": f"{aws_secret}"
+          }
+      },
+      "values": {
+        "loadbalancer": f"{eks_endpoint}",
+        "loadbalancer_hosted_zone": "eu-west-1",
+        "name": "humanitec-eks",
+        "region": "eu-west-1"
+      }
+    }
+}
+
+response = requests.request("POST", url, headers=headers, json=payload)
+if response.status_code==200:
+    print(f"The EKS resource definition has been registered.")
+else:
+    print(f"Unable to create EKS resource account. POST {url} returned status code {response.status_code}.")
+
+
