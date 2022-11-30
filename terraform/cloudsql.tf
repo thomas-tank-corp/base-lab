@@ -21,4 +21,11 @@ resource "google_sql_user" "users" {
   password = random_id.db_pass.hex
 }
 
+output "psql_dev_connection_name" {
+    value = google_sql_database_instance.dev.connection_name
+}
+
+output "psql_dev_password" {
+    value = random_id.db_pass.hex
+}
 

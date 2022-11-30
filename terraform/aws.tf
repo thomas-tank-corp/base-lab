@@ -98,6 +98,10 @@ module "security_group" {
 
 }
 
+output "eks_cluster_endpoint" {
+    value = module.eks.cluster_endpoint
+}
+
 
 # module "db" {
 #   source  = "terraform-aws-modules/rds/aws"
