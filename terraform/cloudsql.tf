@@ -1,6 +1,3 @@
-resource "random_pet" "image" {}
-
-
 resource "random_id" "db_pass" {
   byte_length = 16
 }
